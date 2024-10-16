@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Taco Cloud</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo-section">
+            <img th:src="@{/images/TacoCloud.png}" class="logo" />
+        </div>
+        <div class="order-section">
+            <h1>Order Your Taco Creations!</h1>
+            <h3>Your Tacos in This Order:</h3>
+
+            <ul class="taco-list">
+                <li th:each="taco : ${tacoOrder.tacos}">
+                    <span th:text="${taco.name}">Taco Name</span>
+                </li>
+            </ul>
+			
+			
+			
+            <h3>Deliver My Taco Masterpieces To...</h3>
+            <form method="POST" th:action="@{/orders}" th:object="${tacoOrder}">
+                <div class="form-group">
+                    <label for="deliveryName">Name:</label>
+                    <input type="text" th:field="*{deliveryName}" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="deliveryStreet">Street Address:</label>
+                    <input type="text" th:field="*{deliveryStreet}" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="deliveryCity">City:</label>
+                    <input type="text" th:field="*{deliveryCity}" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="deliveryState">State:</label>
+                    <input type="text" th:field="*{deliveryState}" required />
+                </div>
+				<span class="validationError"
+					th:if="${#fields.hasErrors('deliveryZip')}"
+					th:errors="*{deliveryZip}">Zip Code Error</span>
+                <div class="form-group">
+                    <label for="deliveryZip">Zip Code:</label>
+                    <input type="text" th:field="*{deliveryZip}" required />
+                </div>
+
+                <h3>Here's How I'll Pay...</h3>
+				<span class="validationError"
+										th:if="${#fields.hasErrors('ccNumber')}"
+										th:errors="*{ccNumber}">CC num Error</span>
+                <div class="form-group">
+                    <label for="ccNumber">Credit Card #:</label>
+                    <input type="text" th:field="*{ccNumber}" required />
+                </div>
+				<span class="validationError"
+										th:if="${#fields.hasErrors('ccExpiration')}"
+										th:errors="*{ccExpiration}">Expiration Date is invalid</span>
+                <div class="form-group">
+                    <label for="ccExpiration">Expiration:</label>
+                    <input type="text" th:field="*{ccExpiration}" required placeholder="MM/YY" />
+                </div>
+				<span class="validationError"
+								th:if="${#fields.hasErrors('ccCVV')}"
+								th:errors="*{ccCVV}">CVV is invalid</span>
+                <div class="form-group">
+                    <label for="ccCVV">CVV:</label>
+                    <input type="text" th:field="*{ccCVV}" required />
+                </div>
+
+                <button type="submit">Submit Order</button>
+				<a th:href="@{/design}" class="btn">I need another Taco!</a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
