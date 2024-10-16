@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Taco Cloud</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+  </head>
+ 
+  <divbody>
+		<span class="taco taco1">🌮</span>
+	    <span class="taco taco2">🌮</span>
+	    <span class="taco taco3">🌮</span>
+	    <span class="taco taco4">🌮</span>
+		<span class="taco taco5">🌮</span>
+		<span class="taco taco6">🌮</span>
+		<span class="taco taco7">🌮</span>
+		<span class="taco taco8">🌮</span>
+		<span class="taco taco9">🌮</span>
+		<span class="taco taco10">🌮</span>
+		<span class="taco taco11">🌮</span>
+		<span class="taco taco12">🌮</span>
+		<span class="taco taco13">🌮</span>
+		<span class="taco taco14">🌮</span>
+		<span class="taco taco15">🌮</span>
+		<span class="taco taco16">🌮</span>
+		<span class="taco taco17">🌮</span>
+		<span class="taco taco18">🌮</span>
+		<span class="taco taco19">🌮</span>		
+		<span class="taco taco20">🌮</span>
+		<span class="taco taco21">🌮</span>
+		<span class="taco taco22">🌮</span>	
+		<span class="taco taco23">🌮</span>
+		<span class="taco taco24">🌮</span>		
+		<span class="taco taco25">🌮</span>			
+    <h1>Design your taco!</h1>
+    <img th:src="@{/images/TacoCloud.png}"/>
+ 
+	<form method="POST" th:object="${taco}">
+	   <span class="validationsError"
+				th:if="${#fields.hasErrors('ingredients')}"
+				th:errors="*{ingredients}">Ingredients Error</span>
+	   <div class="grid">
+	     <div class="ingredient-group" id="wraps">
+	     <h3>Designate your wrap:</h3>
+	     <div th:each="ingredient : ${wrap}">
+	       <input th:field="*{ingredients}" type="checkbox" 
+	              th:value="${ingredient.id}"/>
+	       <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+	     </div>
+	     </div>
+
+	     <div class="ingredient-group" id="proteins">
+	     <h3>Pick your protein:</h3>
+	     <div th:each="ingredient : ${protein}">
+	       <input th:field="*{ingredients}" type="checkbox" 
+	              th:value="${ingredient.id}"/>
+	       <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+	     </div>
+	     </div>
+
+	     <div class="ingredient-group" id="cheeses">
+	     <h3>Choose your cheese:</h3>
+	     <div th:each="ingredient : ${cheese}">
+	       <input th:field="*{ingredients}" type="checkbox" 
+	              th:value="${ingredient.id}"/>
+	       <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+	     </div>
+	     </div>
+
+	     <div class="ingredient-group" id="veggies">
+	     <h3>Determine your veggies:</h3>
+	     <div th:each="ingredient : ${veggies}">
+	       <input th:field="*{ingredients}" type="checkbox" 
+	              th:value="${ingredient.id}"/>
+	       <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+	     </div>
+	     </div>
+
+	     <div class="ingredient-group" id="sauces">
+	     <h3>Select your sauce:</h3>
+	     <div th:each="ingredient : ${sauce}">
+	       <input th:field="*{ingredients}" type="checkbox" 
+	              th:value="${ingredient.id}"/>
+	       <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+	     </div>
+	     </div>
+	     </div>
+
+	     <div>
+
+
+	     <h3>Name your taco creation:</h3>
+		 <span class="validationsError"
+		 			th:if="${#fields.hasErrors('name')}"
+		 			th:errors="*{name}">Taco Name Error</span>
+	     <input type="text" th:field="*{name}"/>
+	     <br/>
+
+	     <button>Submit Your Taco</button>
+	     </div>
+	   </form>
+
+	<script>
+	    // Function to randomize taco positions and sizes
+	    function randomizeTacos() {
+	        const tacos = document.querySelectorAll('.taco');
+	        const tacoPositions = []; // Array to store positions for collision detection
+	        
+	        tacos.forEach(taco => {
+	            let position;
+	            let isColliding;
+
+	            // Try until a non-colliding position is found
+	            do {
+	                isColliding = false;
+	                
+	                // Randomize whether taco is on left or right
+	                const isLeft = Math.random() < 0.5; 
+
+	                if (isLeft) {
+	                    const randomLeft = Math.floor(Math.random() * 32); // Random left between 0 and 31
+	                    position = `${randomLeft}%`;
+	                } else {
+	                    const randomRight = Math.floor(Math.random() * (97 - 71 + 1)) + 71; // Random right between 71 and 97
+	                    position = `${randomRight}%`;
+	                }
+
+	                // Check for collisions
+	                if (tacoPositions.includes(position)) {
+	                    isColliding = true; // Position already occupied
+	                }
+	            } while (isColliding);
+	            
+	            taco.style.left = position;
+
+	            // Set random width and height
+	            const randomSize = Math.random() * 10 + 5; // Random size between 5 and 15
+	            taco.style.width = `${randomSize}vw`; 
+	            taco.style.height = `${randomSize}vh`; 
+	            taco.style.opacity = 1; // Make taco visible after positioning
+	            tacoPositions.push(position); // Store the position to prevent future collisions
+	        });
+	    }
+
+	    // Call the function on page load
+	    window.onload = randomizeTacos;
+	</script>
+  </body>
+</html>
