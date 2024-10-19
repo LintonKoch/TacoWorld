@@ -15,7 +15,7 @@ import org.hibernate.validator.constraints.CreditCardNumber;
 @Data
 public class TacoOrder implements Serializable{
 	
-	private static final long serivalVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	private long id;
 	private Date placedAt;
 	
