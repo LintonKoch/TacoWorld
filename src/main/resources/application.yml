@@ -1,4 +1,13 @@
+logging:
+  level:
+    root: info            
+  file:
+    path: /target/generated-sources/logs/  
+    
 spring:
- datasource:
-  generate-unique-name: false
-  name: tacocloud
+  datasource:
+   generate-unique-name: false
+   name: TacoWorld
+  application:
+    name: TacoWorld
+ 

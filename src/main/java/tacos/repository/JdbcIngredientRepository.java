@@ -47,8 +47,7 @@ public class JdbcIngredientRepository implements IngredientRepository {
 				ingredient.getName(),
 				ingredient.getType().toString());
 		
-		return ingredient;
-		
+		return ingredient;	
 	}
 	
 	private Ingredient mapRowToIngredient(ResultSet row, int rowNum) throws SQLException {
