@@ -1,7 +1,10 @@
 package tacos.domain;
 
 import java.util.List;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
+
 import lombok.Data;
 
 import jakarta.validation.constraints.Digits;
@@ -10,7 +13,11 @@ import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
 @Data
-public class TacoOrder {
+public class TacoOrder implements Serializable{
+	
+	private static final long serivalVersionUID = 1L;
+	private long id;
+	private Date placedAt;
 	
 	@NotBlank(message="Deliver name is required")
 	private String deliveryName;
