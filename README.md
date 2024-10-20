@@ -1,5 +1,6 @@
 # TacoWorld
-A local website used to order Tacos. 
+A local web site used to order Tacos. This branch is showing a local h2 database, 
+but utilizing Spring Data JDBC instead of JDBC. 
 
 Languages used so far: <br/>
 HTML <br/>
