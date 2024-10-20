@@ -4,9 +4,7 @@ import java.sql.Types;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.asm.Type;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.PreparedStatementCreatorFactory;
@@ -17,9 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 import tacos.interfaces.OrderRepository;
 import tacos.domain.Taco;
 import tacos.domain.TacoOrder;
-import tacos.domain.Ingredient;
 import tacos.domain.IngredientRef;
 
+@Repository
 public class JdbcOderRepository implements OrderRepository {
 	private JdbcOperations jdbcOperations;
 	
